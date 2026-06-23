@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Waste Management System</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="splash-screen" id="splashScreen">
+    <div class="splash-card">
+      <div class="splash-logo">♻️</div>
+      <h1>Welcome to SWMS</h1>
+      <p class="splash-subtitle">Smart Waste Management System</p>
+      <div class="splash-loader"></div>
+      <button class="splash-btn" onclick="launchLogin()">Get Started</button>
+    </div>
+  </div>
+
+    <!-- LOGIN MODAL -->
+    <div class="modal-overlay" id="loginModal">
+      <div class="login-box">
+        <button class="modal-close" onclick="closeLogin()">&times;</button>
+
+        <div class="login-logo">
+          <div class="logo-icon">♻️</div>
+        </div>
+        <h2 class="login-title">Welcome to <span>SWMS</span></h2>
+        <p class="login-sub">Sign in to access your dashboard</p>
+
+        <form onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" id="loginEmail" placeholder="you@example.com" required>
+          </div>
+
+          <div class="form-group">
+            <label>Password</label>
+            <div class="password-wrap">
+              <input type="password" id="loginPassword" placeholder="Enter your password" required>
+              <span class="toggle-pass" onclick="togglePassword()">👁️</span>
+            </div>
+          </div>
+
+          <div class="form-options">
+            <label class="remember">
+              <input type="checkbox"> Remember me
+            </label>
+            <a href="#" class="forgot">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="btn-login">Sign In</button>
+
+          <p class="login-footer">
+            Don't have an account? <a href="#">Register here</a>
+          </p>
+        </form>
+      </div>
+    </div>
+
+  <div id="appContainer" class="app-hidden">
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <div class="logo-icon">♻️</div>
+        <div>
+          <div class="logo-text">SWMS</div>
+          <div class="logo-sub">Smart Waste Management</div>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#intro">About</a></li>
+        <li><a href="#problem">Problem</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#usecase">Use Case</a></li>
+        <li><a href="#howit">How It Works</a></li>
+        <li><a href="#diagram">Diagrams</a></li>
+        <li><a href="#benefits">Benefits</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#" class="nav-login" onclick="openLogin(); return false;">🔐 Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <script>
+    function openLogin() {
+      document.getElementById('loginModal').classList.add('show');
+    }
+    function closeLogin() {
+      document.getElementById('loginModal').classList.remove('show');
+    }
+    function togglePassword() {
+      const pass = document.getElementById('loginPassword');
+      pass.type = pass.type === 'password' ? 'text' : 'password';
+    }
+    function launchLogin() {
+      document.getElementById('splashScreen').classList.add('hidden');
+      openLogin();
+    }
+
+    function showApp() {
+      document.getElementById('appContainer').classList.remove('app-hidden');
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const pass = document.getElementById('loginPassword').value;
+
+      if (pass.length < 6) {
+        alert('Password must be at least 6 characters.');
+        return;
+      }
+      alert('Welcome back, ' + email + '! 🎉');
+      closeLogin();
+      showApp();
+    }
+    // Close modal when clicking outside
+    document.getElementById('loginModal').addEventListener('click', function(e) {
+      if (e.target === this) closeLogin();
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // auto-open login after a short splash delay (ms)
+      setTimeout(launchLogin, 1600);
+    });
+  </script>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge">🌍 Green Tech Innovation</div>
+        <h1>Smart <span>Waste Management</span> System</h1>
+        <p>
+          An intelligent platform that connects residents, waste collectors,
+          and service providers to create cleaner, smarter, and more
+          sustainable communities.
+        </p>
+        <div class="hero-btns">
+          <a href="#features" class="btn btn-yellow">🚀 Explore Features</a>
+          <a href="#diagram" class="btn btn-white-outline">📊 View Diagrams</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-box">
+            <div class="stat-number">85%</div>
+            <div class="stat-label">Waste Reduction</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">60%</div>
+            <div class="stat-label">Cost Savings</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Real-Time Tracking</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="dashboard-card">
+          <div class="dc-header">
+            <div class="dc-title">📊 SWMS Dashboard</div>
+            <div class="blink-dot"></div>
+          </div>
+          <div class="dc-metrics">
+            <div class="dc-metric">
+              <div class="dc-metric-val">142</div>
+              <div class="dc-metric-lbl">Bins Monitored</div>
+            </div>
+            <div class="dc-metric">
+              <div class="dc-metric-val">98%</div>
+              <div class="dc-metric-lbl">Collection Rate</div>
+            </div>
+            <div class="dc-metric">
+              <div class="dc-metric-val">24</div>
+              <div class="dc-metric-lbl">Active Routes</div>
+            </div>
+            <div class="dc-metric">
+              <div class="dc-metric-val">3.2T</div>
+              <div class="dc-metric-lbl">Recycled Today</div>
+            </div>
+          </div>
+          <div class="dc-bar-section">
+            <div class="dc-bar-row"><span>General Waste</span><span>72%</span></div>
+            <div class="dc-bar"><div class="dc-bar-fill" style="width:72%"></div></div>
+            <div class="dc-bar-row"><span>Recyclables</span><span>85%</span></div>
+            <div class="dc-bar"><div class="dc-bar-fill" style="width:85%"></div></div>
+            <div class="dc-bar-row"><span>Organics</span><span>60%</span></div>
+            <div class="dc-bar"><div class="dc-bar-fill" style="width:60%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section id="intro">
+    <div class="container">
+      <div class="intro-grid">
+        <div>
+          <div class="sec-badge">🌱 About SWMS</div>
+          <h2 class="sec-title">What is <span>SWMS?</span></h2>
+          <p class="sec-desc">
+            The Smart Waste Management System (SWMS) is a technology-driven
+            platform designed to modernize and optimize waste collection,
+            sorting, and disposal processes across urban and rural communities.
+          </p>
+          <p class="sec-desc">
+            By leveraging IoT sensors, real-time data analytics, and a
+            user-friendly mobile/web interface, SWMS ensures timely collection,
+            reduces operational costs, and promotes recycling and environmental
+            sustainability.
+          </p>
+        </div>
+        <div class="info-cards">
+          <div class="info-card wide">
+            <div class="info-card-icon">🚀</div>
+            <h4>Our Mission</h4>
+            <p>To revolutionize waste management through smart technology,
+            making communities cleaner and greener for future generations.</p>
+          </div>
+          <div class="info-card">
+            <div class="info-card-icon">📡</div>
+            <h4>IoT Enabled</h4>
+            <p>Smart sensors track bin levels in real time.</p>
+          </div>
+          <div class="info-card">
+            <div class="info-card-icon">📱</div>
+            <h4>Mobile First</h4>
+            <p>Easy-to-use app for residents and collectors.</p>
+          </div>
+          <div class="info-card">
+            <div class="info-card-icon">📊</div>
+            <h4>Data Analytics</h4>
+            <p>Insights to improve routes and efficiency.</p>
+          </div>
+          <div class="info-card">
+            <div class="info-card-icon">♻️</div>
+            <h4>Eco Friendly</h4>
+            <p>Promotes recycling and waste reduction goals.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section id="problem">
+    <div class="container">
+      <div class="center">
+        <div class="sec-badge">⚠️ The Problem</div>
+        <h2 class="sec-title">Challenges in <span>Waste Management</span></h2>
+        <p class="sec-desc">
+          Traditional waste management systems are inefficient, costly, and
+          environmentally damaging. Here are the key problems we solve.
+        </p>
+      </div>
+      <div class="prob-grid">
+        <div class="prob-card">
+          <div class="prob-icon" style="background:#fff3f3">🗑️</div>
+          <h3>Overflowing Bins</h3>
+          <p>Bins overflow before scheduled collection, causing health hazards
+          and environmental pollution in communities.</p>
+        </div>
+        <div class="prob-card">
+          <div class="prob-icon" style="background:#fff8f0">🚛</div>
+          <h3>Inefficient Routes</h3>
+          <p>Collectors follow fixed routes regardless of bin fill levels,
+          wasting fuel and time on unnecessary trips.</p>
+        </div>
+        <div class="prob-card">
+          <div class="prob-icon" style="background:#f0f8ff">📋</div>
+          <h3>Poor Tracking</h3>
+          <p>No real-time visibility of collection status leads to missed
+          pickups and resident complaints going unresolved.</p>
+        </div>
+        <div class="prob-card">
+          <div class="prob-icon" style="background:#f0fff4">💰</div>
+          <h3>High Operational Costs</h3>
+          <p>Manual processes and unoptimized scheduling drive up operational
+          costs significantly for service providers.</p>
+        </div>
+        <div class="prob-card">
+          <div class="prob-icon" style="background:#f5f0ff">♻️</div>
+          <h3>Low Recycling Rates</h3>
+          <p>Lack of awareness and poor waste sorting infrastructure leads to
+          very low recycling and high landfill usage.</p>
+        </div>
+        <div class="prob-card">
+          <div class="prob-icon" style="background:#f0fffd">📞</div>
+          <h3>No Communication</h3>
+          <p>Residents have no easy way to report issues, request pickups, or
+          receive updates about collection schedules.</p>
+        </div>
+      </div>
+
+      <!-- Stakeholders -->
+      <div class="stakeholders-box">
+        <h3>👥 Key Stakeholders</h3>
+        <p>SWMS serves four primary stakeholder groups, each with specific
+        needs and roles within the system.</p>
+        <div class="sh-grid">
+          <div class="sh-item">
+            <div class="icon">🏠</div>
+            <span>Residents / Customers</span>
+          </div>
+          <div class="sh-item">
+            <div class="icon">🚛</div>
+            <span>Waste Collectors</span>
+          </div>
+          <div class="sh-item">
+            <div class="icon">🏢</div>
+            <span>Service Providers</span>
+          </div>
+          <div class="sh-item">
+            <div class="icon">🏛️</div>
+            <span>FCC / Government</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <div class="container">
+      <div class="center">
+        <div class="sec-badge">⚙️ Features</div>
+        <h2 class="sec-title">System <span>Features</span></h2>
+        <p class="sec-desc">
+          SWMS offers a comprehensive set of features designed to address
+          every aspect of modern waste management.
+        </p>
+      </div>
+      <div class="feat-grid">
+        <div class="feat-card">
+          <div class="feat-icon">📡</div>
+          <h3>Real-Time Bin Monitoring</h3>
+          <p>IoT sensors continuously monitor bin fill levels and send alerts
+          when bins reach capacity thresholds.</p>
+          <span class="feat-tag">IoT</span>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">🗺️</div>
+          <h3>Smart Route Optimization</h3>
+          <p>AI-powered routing ensures collectors only visit full bins,
+          reducing fuel consumption and travel time significantly.</p>
+          <span class="feat-tag">AI / ML</span>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">📱</div>
+          <h3>Resident Mobile App</h3>
+          <p>Residents can schedule pickups, report issues, track collection
+          status, and receive notifications in real time.</p>
+          <span class="feat-tag">Mobile</span>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">📊</div>
+          <h3>Analytics Dashboard</h3>
+          <p>Comprehensive dashboards for managers to monitor KPIs, generate
+          reports, and make data-driven decisions.</p>
+          <span class="feat-tag">Analytics</span>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">🔔</div>
+          <h3>Automated Alerts</h3>
+          <p>Automatic SMS and push notifications for collection schedules,
+          bin overflow warnings, and service updates.</p>
+          <span class="feat-tag">Notifications</span>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">♻️</div>
+          <h3>Recycling Management</h3>
+          <p>Dedicated waste categorization system to promote recycling with
+          separate tracking for recyclable materials.</p>
+          <span class="feat-tag">Green</span>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">💳</div>
+          <h3>Online Payments</h3>
+          <p>Secure online billing and payment processing for waste collection
+          services with automated invoice generation.</p>
+          <span class="feat-tag">Payments</span>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">📋</div>
+          <h3>Complaint Management</h3>
+          <p>Residents can submit and track complaints, while managers can
+          assign and resolve issues efficiently.</p>
+          <span class="feat-tag">Support</span>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">🔐</div>
+          <h3>Role-Based Access</h3>
+          <p>Secure access control ensures each user type sees only relevant
+          features and data appropriate to their role.</p>
+          <span class="feat-tag">Security</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USE CASE -->
+  <section id="usecase">
+    <div class="container">
+      <div class="sec-badge">📐 Use Case</div>
+      <h2 class="sec-title">Use Case <span>Diagram</span></h2>
+      <p class="sec-desc">
+        Overview of all system actors and the use cases available to each
+        stakeholder group in the SWMS platform.
+      </p>
+      <div class="uc-grid">
+        <div class="uc-diagram">
+          <div class="uc-diag-title">System Actors & Use Cases</div>
+          <div class="actors-row">
+            <div class="actor a1">
+              <div class="actor-circle">🏠</div>
+              <div class="actor-lbl">Customer</div>
+            </div>
+            <div class="actor a2">
+              <div class="actor-circle">🚛</div>
+              <div class="actor-lbl">Collector</div>
+            </div>
+            <div class="actor a3">
+              <div class="actor-circle">🏢</div>
+              <div class="actor-lbl">Provider</div>
+            </div>
+            <div class="actor a4">
+              <div class="actor-circle">🏛️</div>
+              <div class="actor-lbl">FCC</div>
+            </div>
+          </div>
+          <div class="uc-pills">
+            <div class="uc-pill"><div class="uc-dot"></div>Register / Login</div>
+            <div class="uc-pill"><div class="uc-dot"></div>Schedule Pickup</div>
+            <div class="uc-pill"><div class="uc-dot"></div>Track Collection</div>
+            <div class="uc-pill"><div class="uc-dot"></div>Submit Complaint</div>
+            <div class="uc-pill"><div class="uc-dot"></div>Make Payment</div>
+            <div class="uc-pill"><div class="uc-dot"></div>View Dashboard</div>
+            <div class="uc-pill"><div class="uc-dot"></div>Optimize Routes</div>
+            <div class="uc-pill"><div class="uc-dot"></div>Monitor Bins</div>
+            <div class="uc-pill"><div class="uc-dot"></div>Generate Reports</div>
+            <div class="uc-pill"><div class="uc-dot"></div>Manage Users</div>
+            <div class="uc-pill"><div class="uc-dot"></div>Send Alerts</div>
+            <div class="uc-pill"><div class="uc-dot"></div>Audit System</div>
+          </div>
+        </div>
+        <div class="uc-list">
+          <div class="uc-item">
+            <div class="uc-item-icon">🏠</div>
+            <div>
+              <h4>Customer / Resident</h4>
+              <p>Register, log in, schedule waste pickups, track collection
+              in real-time, make payments, and submit complaints or feedback.</p>
+            </div>
+          </div>
+          <div class="uc-item">
+            <div class="uc-item-icon">🚛</div>
+            <div>
+              <h4>Waste Collector</h4>
+              <p>View assigned routes, update collection status, report bin
+              conditions, and communicate with dispatch in real time.</p>
+            </div>
+          </div>
+          <div class="uc-item">
+            <div class="uc-item-icon">🏢</div>
+            <div>
+              <h4>Service Provider</h4>
+              <p>Manage collector assignments, optimize routes, view analytics,
+              generate invoices, and resolve customer complaints.</p>
+            </div>
+          </div>
+          <div class="uc-item">
+            <div class="uc-item-icon">🏛️</div>
+            <div>
+              <h4>FCC / Government</h4>
+              <p>Monitor overall system performance, audit service providers,
+              access compliance reports, and enforce regulations.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="howit">
+    <div class="container">
+      <div class="center">
+        <div class="sec-badge">🔄 Process</div>
+        <h2 class="sec-title">How <span>It Works</span></h2>
+        <p class="sec-desc">
+          A simple four-step process that connects residents, collectors,
+          and managers seamlessly.
+        </p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <h3>Register & Setup</h3>
+          <p>Residents register on the platform, set up their profile, and
+          link their address to the nearest waste collection zone.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <h3>Monitor & Detect</h3>
+          <p>IoT sensors in smart bins detect fill levels and automatically
+          trigger collection requests when thresholds are reached.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <h3>Dispatch & Collect</h3>
+          <p>The system optimizes routes and dispatches the nearest available
+          collector to efficiently complete the pickup.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">4</div>
+          <h3>Report & Improve</h3>
+          <p>Collection data is logged, analyzed, and used to continuously
+          improve routes, schedules, and service quality.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIAGRAMS -->
+  <section id="diagram">
+    <div class="container">
+      <div class="center">
+        <div class="sec-badge">📐 Diagrams</div>
+        <h2 class="sec-title">System <span>Diagrams</span></h2>
+        <p class="sec-desc">
+          Technical diagrams illustrating the system architecture,
+          data model, and interaction flows.
+        </p>
+      </div>
+      <div class="diag-tabs">
+        <button class="tab-btn active" onclick="showTab('erd')">📦 ERD</button>
+        <button class="tab-btn" onclick="showTab('class')">🧩 Class Diagram</button>
+        <button class="tab-btn" onclick="showTab('seq')">🔁 Sequence Diagram</button>
+        <button class="tab-btn" onclick="showTab('dfd')">🌐 DFD</button>
+      </div>
+
+      <!-- ERD -->
+      <div class="tab-content active" id="tab-erd">
+        <div class="diag-box">
+          <div class="diag-label">📦 ENTITY RELATIONSHIP DIAGRAM</div>
+          <div class="erd-entities">
+            <div class="erd-entity">
+              <div class="erd-entity-name">USER</div>
+              <div class="erd-attr"><span class="pk">🔑 userID (PK)</span></div>
+              <div class="erd-attr">name</div>
+              <div class="erd-attr">email</div>
+              <div class="erd-attr">password</div>
+              <div class="erd-attr">phone</div>
+              <div class="erd-attr">role</div>
+              <div class="erd-attr">address</div>
+            </div>
+            <div class="erd-entity">
+              <div class="erd-entity-name">WASTE BIN</div>
+              <div class="erd-attr"><span class="pk">🔑 binID (PK)</span></div>
+              <div class="erd-attr"><span class="fk">🔗 userID (FK)</span></div>
+              <div class="erd-attr">location</div>
+              <div class="erd-attr">fillLevel</div>
+              <div class="erd-attr">binType</div>
+              <div class="erd-attr">status</div>
+              <div class="erd-attr">lastUpdated</div>
+            </div>
+            <div class="erd-entity">
+              <div class="erd-entity-name">COLLECTION</div>
+              <div class="erd-attr"><span class="pk">🔑 collectionID (PK)</span></div>
+              <div class="erd-attr"><span class="fk">🔗 binID (FK)</span></div>
+              <div class="erd-attr"><span class="fk">🔗 collectorID (FK)</span></div>
+              <div class="erd-attr">scheduledDate</div>
+              <div class="erd-attr">completedDate</div>
+              <div class="erd-attr">status</div>
+            </div>
+            <div class="erd-entity">
+              <div class="erd-entity-name">COMPLAINT</div>
+              <div class="erd-attr"><span class="pk">🔑 complaintID (PK)</span></div>
+              <div class="erd-attr"><span class="fk">🔗 userID (FK)</span></div>
+              <div class="erd-attr">description</div>
+              <div class="erd-attr">status</div>
+              <div class="erd-attr">submittedAt</div>
+              <div class="erd-attr">resolvedAt</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CLASS DIAGRAM -->
+      <div class="tab-content" id="tab-class">
+        <div class="diag-box">
+          <div class="diag-label">🧩 CLASS DIAGRAM</div>
+          <div class="class-entities">
+            <div class="class-entity">
+              <div class="class-entity-name">User</div>
+              <div class="class-section-lbl">Attributes</div>
+              <div class="class-attr">- userID: int</div>
+              <div class="class-attr">- name: String</div>
+              <div class="class-attr">- email: String</div>
+              <div class="class-attr">- role: Enum</div>
+              <div class="class-section-lbl">Methods</div>
+              <div class="class-attr">+ login()</div>
+              <div class="class-attr">+ register()</div>
+              <div class="class-attr">+ updateProfile()</div>
+            </div>
+            <div class="class-entity">
+              <div class="class-entity-name">WasteBin</div>
+              <div class="class-section-lbl">Attributes</div>
+              <div class="class-attr">- binID: int</div>
+              <div class="class-attr">- location: String</div>
+              <div class="class-attr">- fillLevel: float</div>
+              <div class="class-attr">- binType: String</div>
+              <div class="class-section-lbl">Methods</div>
+              <div class="class-attr">+ updateFillLevel()</div>
+              <div class="class-attr">+ sendAlert()</div>
+              <div class="class-attr">+ getStatus()</div>
+            </div>
+            <div class="class-entity">
+              <div class="class-entity-name">Collection</div>
+              <div class="class-section-lbl">Attributes</div>
+              <div class="class-attr">- collectionID: int</div>
+              <div class="class-attr">- scheduledDate: Date</div>
+              <div class="class-attr">- status: String</div>
+              <div class="class-attr">- collectorID: int</div>
+              <div class="class-section-lbl">Methods</div>
+              <div class="class-attr">+ scheduleCollection()</div>
+              <div class="class-attr">+ completeCollection()</div>
+              <div class="class-attr">+ cancelCollection()</div>
+            </div>
+            <div class="class-entity">
+              <div class="class-entity-name">Route</div>
+              <div class="class-section-lbl">Attributes</div>
+              <div class="class-attr">- routeID: int</div>
+              <div class="class-attr">- collectorID: int</div>
+              <div class="class-attr">- stops: List</div>
+              <div class="class-attr">- distance: float</div>
+              <div class="class-section-lbl">Methods</div>
+              <div class="class-attr">+ optimizeRoute()</div>
+              <div class="class-attr">+ assignCollector()</div>
+              <div class="class-attr">+ trackProgress()</div>
+            </div>
+            <div class="class-entity">
+              <div class="class-entity-name">Payment</div>
+              <div class="class-section-lbl">Attributes</div>
+              <div class="class-attr">- paymentID: int</div>
+              <div class="class-attr">- amount: float</div>
+              <div class="class-attr">- status: String</div>
+              <div class="class-attr">- date: Date</div>
+              <div class="class-section-lbl">Methods</div>
+              <div class="class-attr">+ processPayment()</div>
+              <div class="class-attr">+ generateInvoice()</div>
+              <div class="class-attr">+ refund()</div>
+            </div>
+            <div class="class-entity">
+              <div class="class-entity-name">Complaint</div>
+              <div class="class-section-lbl">Attributes</div>
+              <div class="class-attr">- complaintID: int</div>
+              <div class="class-attr">- description: String</div>
+              <div class="class-attr">- status: String</div>
+              <div class="class-attr">- userID: int</div>
+              <div class="class-section-lbl">Methods</div>
+              <div class="class-attr">+ submitComplaint()</div>
+              <div class="class-attr">+ resolveComplaint()</div>
+              <div class="class-attr">+ trackStatus()</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEQUENCE DIAGRAM -->
+      <div class="tab-content" id="tab-seq">
+        <div class="diag-box">
+          <div class="diag-label">🔁 SEQUENCE DIAGRAM — Schedule Pickup</div>
+          <div class="seq-actors">
+            <div class="seq-actor">🏠 Resident</div>
+            <div class="seq-actor">📱 App</div>
+            <div class="seq-actor">⚙️ System</div>
+            <div class="seq-actor">🚛 Collector</div>
+            <div class="seq-actor">🏢 Manager</div>
+          </div>
+          <div class="seq-rows">
+            <div class="seq-row">
+              <span class="seq-from">Resident</span>
+              <span class="seq-arrow">──────────────▶</span>
+              <span class="seq-msg">Request Pickup</span>
+              <span class="seq-to">App</span>
+            </div>
+            <div class="seq-row">
+              <span class="seq-from">App</span>
+              <span class="seq-arrow">──────────────▶</span>
+              <span class="seq-msg">Submit Request</span>
+              <span class="seq-to">System</span>
+            </div>
+            <div class="seq-row">
+              <span class="seq-from">System</span>
+              <span class="seq-arrow">──────────────▶</span>
+              <span class="seq-msg">Check Bin Level</span>
+              <span class="seq-to">System</span>
+            </div>
+            <div class="seq-row">
+              <span class="seq-from">System</span>
+              <span class="seq-arrow">──────────────▶</span>
+              <span class="seq-msg">Optimize Route</span>
+              <span class="seq-to">System</span>
+            </div>
+            <div class="seq-row">
+              <span class="seq-from">System</span>
+              <span class="seq-arrow">──────────────▶</span>
+              <span class="seq-msg">Assign Job</span>
+              <span class="seq-to">Collector</span>
+            </div>
+            <div class="seq-row">
+              <span class="seq-from">Collector</span>
+              <span class="seq-arrow">──────────────▶</span>
+              <span class="seq-msg">Confirm & Start</span>
+              <span class="seq-to">System</span>
+            </div>
+            <div class="seq-row">
+              <span class="seq-from">System</span>
+              <span class="seq-arrow">──────────────▶</span>
+              <span class="seq-msg">Notify Resident</span>
+              <span class="seq-to">App</span>
+            </div>
+            <div class="seq-row">
+              <span class="seq-from">Collector</span>
+              <span class="seq-arrow">──────────────▶</span>
+              <span class="seq-msg">Mark Complete</span>
+              <span class="seq-to">System</span>
+            </div>
+            <div class="seq-row">
+              <span class="seq-from">System</span>
+              <span class="seq-arrow">──────────────▶</span>
+              <span class="seq-msg">Update Dashboard</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section id="benefits">
+    <div class="container">
+      <div class="center">
+        <div class="sec-badge">✨ Benefits</div>
+        <h2 class="sec-title">Why <span>SWMS</span> Matters</h2>
+        <p class="sec-desc">
+          SWMS delivers measurable impact by improving efficiency, cutting
+          costs, and increasing environmental sustainability across every
+          stage of waste management.
+        </p>
+      </div>
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">💡</div>
+          <h3>Reduced Waste</h3>
+          <p>Smart analytics help reduce landfill usage and maximize recycling.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">⏱️</div>
+          <h3>Faster Collections</h3>
+          <p>Optimized routes and real-time alerts minimize missed pickups.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">💰</div>
+          <h3>Lower Costs</h3>
+          <p>Efficient operations lower fuel, labor, and maintenance expenses.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">🌿</div>
+          <h3>Greener Cities</h3>
+          <p>Improved recycling and waste management support healthier communities.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container contact-section">
+      <div class="center">
+        <div class="sec-badge">📞 Contact</div>
+        <h2 class="sec-title">Get in <span>Touch</span></h2>
+        <p class="sec-desc">
+          Have questions or want to learn more about SWMS? Reach out and our
+          team will help you build a smarter waste strategy.
+        </p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <h3>Office</h3>
+          <p>123 Green Way, Smart City, Country</p>
+        </div>
+        <div class="contact-card">
+          <h3>Email</h3>
+          <p>hello@swms.example.com</p>
+        </div>
+        <div class="contact-card">
+          <h3>Phone</h3>
+          <p>+1 (555) 123-4567</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </div>
+
+</body>
+</html>
