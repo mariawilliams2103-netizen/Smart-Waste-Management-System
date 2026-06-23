@@ -71,7 +71,12 @@
           <div class="logo-sub">Smart Waste Management</div>
         </div>
       </a>
-      <ul class="nav-links">
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" onclick="toggleNav()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
         <li><a href="#intro">About</a></li>
         <li><a href="#problem">Problem</a></li>
         <li><a href="#features">Features</a></li>
@@ -88,6 +93,7 @@
   <script>
     function openLogin() {
       document.getElementById('loginModal').classList.add('show');
+      closeMobileNav();
     }
     function closeLogin() {
       document.getElementById('loginModal').classList.remove('show');
@@ -95,6 +101,14 @@
     function togglePassword() {
       const pass = document.getElementById('loginPassword');
       pass.type = pass.type === 'password' ? 'text' : 'password';
+    }
+    function toggleNav() {
+      document.getElementById('navLinks').classList.toggle('open');
+      document.getElementById('navToggle').classList.toggle('open');
+    }
+    function closeMobileNav() {
+      document.getElementById('navLinks').classList.remove('open');
+      document.getElementById('navToggle').classList.remove('open');
     }
     function launchLogin() {
       document.getElementById('splashScreen').classList.add('hidden');
@@ -125,7 +139,7 @@
 
     document.addEventListener('DOMContentLoaded', function() {
       // auto-open login after a short splash delay (ms)
-      setTimeout(launchLogin, 2600);
+      setTimeout(launchLogin, 9600);
     });
   </script>
 
