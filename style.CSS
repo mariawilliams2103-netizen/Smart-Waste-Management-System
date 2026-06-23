@@ -949,6 +949,57 @@ section { padding: 5rem 2rem; }
   overflow: hidden;
 }
 
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .hero-inner { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+  .hero-stats { grid-template-columns: 1fr 1fr; }
+  .dashboard-card { width: 100%; }
+  .intro-grid, .uc-grid, .prob-grid, .feat-grid, .contact-grid, .info-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+  .steps-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  nav .nav-inner { flex-wrap: wrap; padding: 1rem; height: auto; gap: 1rem; }
+  .nav-links { flex-wrap: wrap; justify-content: center; gap: 0.5rem; }
+  .hero-inner, .intro-grid, .uc-grid, .diag-tabs, .prob-grid, .feat-grid, .contact-grid, .info-cards, .steps-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-inner { padding: 2rem 1rem; }
+  .hero-visual { justify-content: center; }
+  .hero-btns { justify-content: center; }
+  .hero, section { padding: 4rem 1.2rem; }
+  .hero h1 { font-size: 2.4rem; }
+  .hero p, .sec-desc, .prob-card p, .feat-card p, .uc-item p, .step-card p { font-size: 0.95rem; }
+  .hero-btns { justify-content: center; }
+  .btn { width: 100%; justify-content: center; }
+  .diag-box { padding: 2rem; }
+  .erd-entities { grid-template-columns: 1fr 1fr; }
+  .uc-pills { grid-template-columns: 1fr; }
+  .steps-grid::before { left: 5%; width: 90%; }
+}
+
+@media (max-width: 600px) {
+  body { overflow-x: hidden; }
+  .hero, section { padding: 3rem 1rem; }
+  .nav-inner { padding: 1rem 0.75rem; }
+  .nav-links a { padding: 8px 10px; font-size: 0.78rem; }
+  .hero h1 { font-size: 2rem; }
+  .hero p { font-size: 0.95rem; max-width: 100%; }
+  .hero-btns { gap: 0.75rem; }
+  .dashboard-card { padding: 1.6rem; }
+  .dc-metrics { grid-template-columns: 1fr; }
+  .hero-stats { grid-template-columns: 1fr; }
+  .splash-card { padding: 2.2rem 1.8rem; }
+  .splash-loader { width: 55px; height: 55px; }
+  .splash-btn { padding: 12px 0; }
+  .feat-card, .prob-card, .uc-item, .step-card, .info-card, .contact-card, .erd-entity, .diag-box { padding: 1.5rem; }
+  .sec-title { font-size: 1.8rem; }
+  .sec-desc { font-size: 0.95rem; }
+  .contact-grid { align-items: stretch; }
+}
+
 .erd-entity-name {
   background: rgba(76,175,80,0.25);
   color: #4caf50;
